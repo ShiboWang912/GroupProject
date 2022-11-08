@@ -1,0 +1,81 @@
+<%- include ../partials/header.ejs %>
+
+<%- include ../partials/main_nav.ejs %>
+  
+
+  <!-- Main Content -->
+  <main class="container">
+    <div class="row">
+        <div class="offset-md-1 col-md-11">
+            <h1><%= title %></h1>
+
+            <% if(typeof displayName == 'string' && displayName) { %>
+                <a href="/incident-list/add" class="btn btn-primary" role="button">
+                <i class="fas fa-plus-circle"></i> Add a Incident</a>
+            <% } %>
+            <br>
+            <table class="table table-bordered table-striped table-hover">
+                <!-- Header Row-->
+                <tr class="d-flex">
+                    <% if(typeof displayName == 'string' && displayName) { %>
+                        <th class="text-center col-2">IncidentId</th>
+                        <th class="text-center col-2">Date</th>
+                        <th class="text-center col-1">Priority</th>                       
+                        <th class="text-center col-1">User</th>
+                        <th class="col-4">Narrative</th>
+                        <th class="text-center col-1">Status</th>
+                        <th class="text-center col-1"></th>
+                        <th class="text-center col-1"></th>
+                    <% } else { %>
+                        <th class="text-center col-2">IncidentId</th>
+                        <th class="text-center col-2">Date</th>
+                        <th class="text-center col-1">Priority</th>                        
+                        <th class="text-center col-1">User</th>
+                        <th class="col-4">Narrative</th>
+                        <th class="text-center col-1">Status</th>
+                    <% } %>
+                </tr>
+
+                <!-- Repeatable Template Row -->
+
+                <% for(let count = 0; count < IncidentList.length; count++) { %>
+                    <tr class="d-flex">
+                        <% if(typeof displayName == 'string' && displayName) { %>
+                            <td class="text-center col-2"><%= IncidentList[count].incidentId %></td>
+                            <td class="text-center col-2"><%= IncidentList[count].date %></td>
+                            <td class="text-center col-1"><%= IncidentList[count].priority %></td>
+                            <td class="text-center col-1"><%= IncidentList[count].user %></td>
+                            <td class="col-4"><%= IncidentList[count].narrative %></td>
+                            <td class="text-center col-1"><%= IncidentList[count].status %></td>            
+                            <td class="text-center col-1">
+                                <a href="/incident-list/edit/<%= IncidentList[count]._id %>" class="btn btn-primary btn-sm">
+                                <i class="fas fa-pencil-alt"></i> Edit</a>
+                            </td>
+                            <td class="text-center col-1">
+                                <a href="/incident-list/delete/<%= IncidentList[count]._id %>" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash-alt"></i> Delete</a>
+                            </td>
+                         <% } else { %>
+                            <td class="text-center col-2"><%= IncidentList[count].incidentId %></td>
+                            <td class="text-center col-2"><%= IncidentList[count].date %></td>
+                            <td class="text-center col-1"><%= IncidentList[count].priority %></td>
+                            <td class="text-center col-1"><%= IncidentList[count].user %></td>
+                            <td class="col-4"><%= IncidentList[count].narrative %></td>
+                            <td class="text-center col-1"><%= IncidentList[count].status %></td>  
+                         <% } %>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+    </div>
+  </main>
+  
+<%- include ../partials/bottom_nav.ejs %>  
+
+<%- include ../partials/footer.ejs %>
+  
+
+
+
+
+
